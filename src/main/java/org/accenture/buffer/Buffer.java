@@ -9,36 +9,36 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class Buffer<T> {
-  private Queue<T> buffer;
+public class Buffer {
+  private Queue buffer;
   private int capacity;
-  int numberOfPuts = 0;
-  int numberOfGets = 0;
+  int numberPut = 0;
+  int numberGet = 0;
 
 
-  public Buffer(int bufferSize) {
-    capacity = bufferSize;
-    buffer = new LinkedList<T>();
+  public Buffer(int bsize) {
+    capacity = bsize;
+    buffer = new LinkedList();
   }
 
-  public void put(T element) throws BufferFullException {
+  public void put(Object element) throws BufferFullException {
     if (buffer.size() == capacity) throw new BufferFullException ("Full buffer");
     
 
     System.out.println("Element inserted");
 
     buffer.add(element);
-    numberOfPuts++;
+    numberPut++;
   }
 
-  public T get() throws BufferEmptyException {
+  public Object get() throws BufferEmptyException {
     if (buffer.isEmpty())
       throw new BufferEmptyException("Empty buffer");
 
-    T value = buffer.remove();
+    Object value = buffer.remove();
     System.out.println("Element extracted");
 
-    numberOfGets++;
+    numberGet++;
     return value;
   }
 
@@ -55,6 +55,6 @@ public class Buffer<T> {
   }
 
   public double GetNumberOfOperations() {
-    return numberOfPuts + numberOfGets;
+    return numberPut + numberGet;
   }
 }
